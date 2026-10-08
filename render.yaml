@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: wayfarer-travel-planner
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && git clone --depth 1 https://github.com/Pradumnasaraf/aviationstack-mcp.git aviationstack-mcp && pip install ./aviationstack-mcp
+    startCommand: streamlit run frontend.py --server.address 0.0.0.0 --server.port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.4
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: AVIATION_STACK_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
